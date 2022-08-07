@@ -1,14 +1,26 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  InputRightElement,
+  InputGroup,
+  Button,
+  Input,
+  Stack,
+  Heading,
+  Text,
+  Highlight,
+} from "@chakra-ui/react";
 
 function SignupPage() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [budget, setBudget] = useState(0);
-  const [expenses, setExpenses] = useState([]);
+  const [budget] = useState(0);
+  const [expenses] = useState([]);
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [show, setShow] = useState(false);
+  const handleClick = () => setShow(!show);
 
   const navigate = useNavigate();
 
@@ -44,37 +56,70 @@ function SignupPage() {
   };
 
   return (
-    <div>
+    <>
+      <Heading textAlign={"center"}>Signup</Heading>
+      <br />
+
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            name="usernmae"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            id=""
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Submit</button>
+        <Stack spacing="4">
+          <InputGroup size="lg">
+            <Input
+              size="lg"
+              pr="4.5rem"
+              placeholder="Enter username"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </InputGroup>
+          <InputGroup size="lg">
+            <Input
+              size="lg"
+              pr="4.5rem"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </InputGroup>
+          <InputGroup size="lg">
+            <Input
+              colorScheme="teal"
+              pr="4.5rem"
+              type={show ? "text" : "password"}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <InputRightElement colorScheme="teal" width="4.5rem">
+              <Button
+                colorScheme="teal"
+                h="1.75rem"
+                size="lg"
+                onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          {errorMessage && <p>{errorMessage}</p>}
+
+          <Button colorScheme="teal" type="submit">
+            Signup
+          </Button>
+          <Text fontSize="lg">
+            Already have an account? Login{" "}
+            <Link to={"/login"}>
+              <Highlight
+                query="Here!"
+                styles={{
+                  px: "1",
+                  py: "1",
+                  rounded: "half",
+                  bg: "teal.400",
+                  color: "white",
+                }}>
+                Here!
+              </Highlight>
+            </Link>
+          </Text>
+        </Stack>
       </form>
-      {errorMessage && <p>{errorMessage}</p>}
-    </div>
+    </>
   );
 }
 
