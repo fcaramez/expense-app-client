@@ -78,7 +78,7 @@ function LoginPage() {
           {errorMessage && <p>{errorMessage}</p>}
 
           <Button colorScheme="teal" type="submit">
-            Signup
+            Login
           </Button>
           <Text fontSize="lg">
             Don't have an account? Signup{" "}
