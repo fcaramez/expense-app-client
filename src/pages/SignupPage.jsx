@@ -104,17 +104,9 @@ function SignupPage() {
           <Text fontSize="lg">
             Already have an account? Login{" "}
             <Link to={"/login"}>
-              <Highlight
-                query="Here!"
-                styles={{
-                  px: "1",
-                  py: "1",
-                  rounded: "half",
-                  bg: "teal.400",
-                  color: "white",
-                }}>
+              <Button colorScheme="teal" size="sm">
                 Here!
-              </Highlight>
+              </Button>
             </Link>
           </Text>
         </Stack>

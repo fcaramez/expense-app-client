@@ -12,6 +12,7 @@ import {
   Text,
   Highlight,
 } from "@chakra-ui/react";
+import Appbar from "../components/Appbar";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -38,7 +39,8 @@ function LoginPage() {
         navigate("/");
       })
       .catch((error) => {
-        setErrorMessage(error.data.errorMessage);
+        console.log(error);
+        setErrorMessage(error.response.data.errorMessage);
       });
   };
 
@@ -83,21 +85,12 @@ function LoginPage() {
           <Text fontSize="lg">
             Don't have an account? Signup{" "}
             <Link to={"/signup"}>
-              <Highlight
-                query="Here!"
-                styles={{
-                  px: "1",
-                  py: "1",
-                  rounded: "half",
-                  bg: "teal.400",
-                  color: "white",
-                }}>
-                Here!
-              </Highlight>
+              <Button colorScheme="teal" size="sm">Here!</Button>
             </Link>
           </Text>
         </Stack>
       </form>
+      <Appbar />
     </>
   );
 }

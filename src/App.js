@@ -3,6 +3,7 @@ import SignupPage from "./pages/SignupPage";
 import { Routes, Route } from "react-router-dom";
 import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
+import ProgressPage from "./pages/ProgressPage";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
             <IsAnon>
               <SignupPage />
             </IsAnon>
+          }
+        />
+        <Route
+          path="/progress"
+          element={
+            <IsPrivate>
+              <ProgressPage />
+            </IsPrivate>
           }
         />
       </Routes>
