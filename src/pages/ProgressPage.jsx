@@ -2,6 +2,7 @@ import React from "react";
 import apiService from "../service/api.service";
 import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
+import Appbar from "../components/Appbar";
 
 function ProgressPage() {
   const api = new apiService();

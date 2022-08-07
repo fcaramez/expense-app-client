@@ -89,7 +89,6 @@ function LoginPage() {
           </Text>
         </Stack>
       </form>
-      <Appbar />
     </>
   );
 }
