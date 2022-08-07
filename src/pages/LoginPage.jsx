@@ -10,7 +10,6 @@ import {
   Stack,
   Heading,
   Text,
-  Highlight,
 } from "@chakra-ui/react";
 import Appbar from "../components/Appbar";
 

@@ -7,12 +7,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProviderWrapper } from "./context/auth.context";
 import GlobalStyle from "./styles/styles";
 import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <GlobalStyle />
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <Router>
         <AuthProviderWrapper>
           <App />

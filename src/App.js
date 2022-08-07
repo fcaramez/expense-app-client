@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
 import ProgressPage from "./pages/ProgressPage";
+import ExpenseCreate from "./pages/ExpenseCreate";
 
 function App() {
   return (
@@ -30,6 +31,14 @@ function App() {
           element={
             <IsPrivate>
               <ProgressPage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/create-expense"
+          element={
+            <IsPrivate>
+              <ExpenseCreate />
             </IsPrivate>
           }
         />

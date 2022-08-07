@@ -9,7 +9,6 @@ import {
   Stack,
   Heading,
   Text,
-  Highlight,
 } from "@chakra-ui/react";
 
 function SignupPage() {
