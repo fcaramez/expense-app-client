@@ -5,6 +5,8 @@ import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
 import ProgressPage from "./pages/ProgressPage";
 import ExpenseCreate from "./pages/ExpenseCreate";
+import UserProfileCard from "./components/UserProfileCard";
+import Appbar from "./components/Appbar";
 
 function App() {
   return (
@@ -42,7 +44,9 @@ function App() {
             </IsPrivate>
           }
         />
+        <Route path="/" element={<UserProfileCard />} />
       </Routes>
+      <Appbar />
     </div>
   );
 }

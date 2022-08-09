@@ -33,12 +33,10 @@ function SignupPage() {
         expenses,
       };
 
-      let createdUser = await axios.post(
+       await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/signup`,
         body
       );
-
-      console.log(createdUser);
 
       navigate("/login");
     } catch (error) {

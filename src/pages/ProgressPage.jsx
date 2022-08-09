@@ -86,6 +86,29 @@ function ProgressPage() {
                 .filter((el, ix) => ix < 5)
                 .map((el) => {
                   if (el.source === "expense")
+  return (
+    <Stack spacing={5}>
+      <Heading>Welcome, {user.username}!</Heading>
+      <br />
+      {budget !== null && (
+        <Text fontSize={"xl"}>Your current budget is: {budget} €</Text>
+      )}
+      {expenses.length > 0 && (
+        <>
+          <Heading>Here's your 5 most recent expenses: </Heading>
+          <br />
+          <TableContainer>
+            <Table variant="simple">
+              <Thead>
+                <Tr>
+                  <Th>Name</Th>
+                  <Th>Details</Th>
+                </Tr>
+              </Thead>
+              {expenses
+                .filter((el, ix) => ix < 5)
+                .map((el) => {
+                  if (el.source === "expense")
                     return (
                       <>
                         <Tbody key={el._id}>

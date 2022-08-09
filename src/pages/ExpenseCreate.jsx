@@ -48,7 +48,7 @@ function ExpenseCreate() {
 
   return (
     <>
-      <Heading>Create an Expense</Heading>
+      <Heading textAlign={"center"} >Create an Expense</Heading>
       <br />
       <form onSubmit={handleSubmit}>
         <Stack spacing={3}>
@@ -122,7 +122,6 @@ function ExpenseCreate() {
           {errorMessage && <Text>{errorMessage}</Text>}
         </Stack>
       </form>
-      <Appbar />
     </>
   );
 }
