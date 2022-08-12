@@ -1,5 +1,5 @@
 import React from "react";
-import apiService from "../service/api.service";
+import expenseService from "../service/expense.service";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
@@ -14,7 +14,6 @@ import {
   NumberInput,
   Select,
 } from "@chakra-ui/react";
-import Appbar from "../components/Appbar";
 
 function ExpenseCreate() {
   const [source, setSource] = useState("");
@@ -24,7 +23,7 @@ function ExpenseCreate() {
   const [date, setDate] = useState(Date.now);
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const api = new apiService();
+  const api = new expenseService();
   const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -48,7 +47,7 @@ function ExpenseCreate() {
 
   return (
     <>
-      <Heading textAlign={"center"} >Create an Expense</Heading>
+      <Heading textAlign={"center"}>Create an Expense</Heading>
       <br />
       <form onSubmit={handleSubmit}>
         <Stack spacing={3}>
@@ -112,10 +111,7 @@ function ExpenseCreate() {
           </InputGroup>
           <br />
           <InputGroup alignItems={"center"}>
-            <Button
-              width={"100%"}
-              colorScheme="teal"
-             type="submit">
+            <Button width={"100%"} colorScheme="teal" type="submit">
               Create Expense
             </Button>
           </InputGroup>

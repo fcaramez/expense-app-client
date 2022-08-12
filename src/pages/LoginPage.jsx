@@ -11,7 +11,6 @@ import {
   Heading,
   Text,
 } from "@chakra-ui/react";
-import Appbar from "../components/Appbar";
 
 function LoginPage() {
   const [email, setEmail] = useState("");

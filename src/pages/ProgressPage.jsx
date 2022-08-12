@@ -1,5 +1,6 @@
+import { ExpenseModal } from "./../components/ExpenseModal";
 import React from "react";
-import apiService from "../service/api.service";
+import expenseService from "../service/expense.service";
 import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
 import Appbar from "../components/Appbar";
@@ -15,20 +16,14 @@ import {
   Text,
   Stack,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
   useDisclosure,
-  ModalBody,
 } from "@chakra-ui/react";
 
 function ProgressPage() {
-  const api = new apiService();
+  const api = new expenseService();
   const [expenses, setExpenses] = useState([]);
   const [budget, setBudget] = useState(null);
-  const { onOpen, onClose } = useDisclosure();
+  const { onClose } = useDisclosure();
   const [modalInfo, setModalInfo] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -64,30 +59,8 @@ function ProgressPage() {
   }, []);
 
   return (
-    <Stack spacing={5}>
-      <Heading>Welcome, {user.username}!</Heading>
+    <Stack spacing={7}>
       <br />
-      {budget !== null && (
-        <Text fontSize={"xl"}>Your current budget is: {budget} €</Text>
-      )}
-      {expenses.length > 0 && (
-        <>
-          <Heading>Here's your 5 most recent expenses: </Heading>
-          <br />
-          <TableContainer>
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th>Name</Th>
-                  <Th>Details</Th>
-                </Tr>
-              </Thead>
-              {expenses
-                .filter((el, ix) => ix < 5)
-                .map((el) => {
-                  if (el.source === "expense")
-  return (
-    <Stack spacing={5}>
       <Heading>Welcome, {user.username}!</Heading>
       <br />
       {budget !== null && (
@@ -117,7 +90,7 @@ function ProgressPage() {
                             <Td>
                               <Button
                                 colorScheme={"teal"}
-                                backgroundColor={"teal.500"}
+                                backgroundColor={"teal.300"}
                                 onClick={() => getModal(el)}>
                                 Details
                               </Button>
@@ -132,33 +105,13 @@ function ProgressPage() {
           </TableContainer>
           {modalInfo !== null && (
             <>
-              <Modal key={modalInfo._id} isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader>Name: {modalInfo.name}</ModalHeader>
-                  <ModalBody>
-                    <Text>Cost: {modalInfo.price} €</Text>
-                    <Text>Date: {modalInfo.date.slice(0, 10)}</Text>
-                    <Text>Type: {modalInfo.type}</Text>
-                  </ModalBody>
-
-                  <ModalFooter>
-                    <Button
-                      colorScheme="teal"
-                      mr={3}
-                      onClick={() => closeModal()}
-                      alignContent={"center"}>
-                      Close
-                    </Button>
-                    <Button
-                      colorScheme={"red"}
-                      backgroundColor={"red.500"}
-                      onClick={() => deleteExpense(modalInfo._id)}>
-                      Remove
-                    </Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
+              <ExpenseModal
+                modalInfo={modalInfo}
+                isOpen={isOpen}
+                onClose={onClose}
+                closeModal={closeModal}
+                deleteExpense={deleteExpense}
+              />
             </>
           )}
         </>
