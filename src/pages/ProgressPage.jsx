@@ -3,7 +3,6 @@ import React from "react";
 import expenseService from "../service/expense.service";
 import { AuthContext } from "../context/auth.context";
 import { useContext, useState, useEffect } from "react";
-import Appbar from "../components/Appbar";
 import {
   TableContainer,
   Table,
@@ -119,7 +118,6 @@ function ProgressPage() {
       {expenses.length > 0 && (
         <h1>Here's your current biggest source of income: </h1>
       )}
-      <Appbar />
     </Stack>
   );
 }

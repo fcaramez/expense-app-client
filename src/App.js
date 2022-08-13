@@ -1,30 +1,28 @@
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
 import { Routes, Route } from "react-router-dom";
 import IsAnon from "./components/IsAnon";
 import IsPrivate from "./components/IsPrivate";
 import ProgressPage from "./pages/ProgressPage";
 import ExpenseCreate from "./pages/ExpenseCreate";
-import UserProfileCard from "./components/UserProfileCard";
-import Appbar from "./components/Appbar";
+import Auth from "./pages/AuthPage";
+import { LandingPage } from "./pages/LandingPage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route
-          path={"/login"}
+          path="/"
           element={
             <IsAnon>
-              <LoginPage />
+              <LandingPage />
             </IsAnon>
           }
         />
         <Route
-          path="/signup"
+          path={"/auth"}
           element={
             <IsAnon>
-              <SignupPage />
+              <Auth />
             </IsAnon>
           }
         />
@@ -44,9 +42,7 @@ function App() {
             </IsPrivate>
           }
         />
-        <Route path="/" element={<UserProfileCard />} />
       </Routes>
-      <Appbar />
     </div>
   );
 }
