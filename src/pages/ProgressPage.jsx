@@ -40,7 +40,6 @@ function ProgressPage() {
   const getExpenses = async () => {
     const response = await api.getExpenses(user._id);
     setExpenses(response.data.expenses);
-    console.log(response.data.expenses);
     setBudget(response.data.budget);
   };
 
@@ -77,29 +76,27 @@ function ProgressPage() {
                   <Th>Details</Th>
                 </Tr>
               </Thead>
-              {expenses
-                .filter((el, ix) => ix < 5)
-                .map((el) => {
-                  if (el.source === "expense")
-                    return (
-                      <>
-                        <Tbody key={el._id}>
-                          <Tr>
+              <Tbody>
+                {expenses
+                  .filter((el, ix) => ix < 5)
+                  .map((el) => {
+                    if (el.source === "expense")
+                      return (
+                          <Tr key={el._id}>
                             <Td>{el.name}</Td>
                             <Td>
                               <Button
-                                colorScheme={"teal"}
-                                backgroundColor={"teal.300"}
+                                colorScheme={"green"}
+                                backgroundColor={"green.400"}
                                 onClick={() => getModal(el)}>
                                 Details
                               </Button>
                             </Td>
                           </Tr>
-                        </Tbody>
-                      </>
-                    );
-                })
-                .reverse()}
+                      );
+                  })
+                  .reverse()}
+              </Tbody>
             </Table>
           </TableContainer>
           {modalInfo !== null && (

@@ -11,6 +11,7 @@ import {
   Button,
   Heading,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useState, useContext } from "react";
@@ -38,7 +39,7 @@ export function Login({ showPassword, setShowPassword, openSignup }) {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser();
-        navigate("/profile");
+        navigate("/feed");
       })
       .catch((error) => {
         console.log(error);
@@ -105,9 +106,11 @@ export function Login({ showPassword, setShowPassword, openSignup }) {
               <Stack pt={6}>
                 <Text align={"center"}>
                   Not registered yet?{" "}
-                  <Button w={"100%"} onClick={() => openSignup()}>
-                    Sign up
-                  </Button>
+                  <Link color={"green.400"}>
+                    <Button w={"100%"} onClick={() => openSignup()}>
+                      Sign up
+                    </Button>
+                  </Link>
                 </Text>
                 {errorMessage && (
                   <Text color={"red.400"} align={"center"}>

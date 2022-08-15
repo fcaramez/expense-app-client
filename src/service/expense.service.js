@@ -12,6 +12,9 @@ class expenseService {
     return this.api.get(`/api/expenses/${apiKey}`);
   };
 
+  getOneExpense = (expenseId) => {
+    return this.api.get(`/api/expense/${expenseId}`);
+  };
   createExpense = (apiKey, body) => {
     return this.api.post(`/api/expenses/${apiKey}`, body);
   };

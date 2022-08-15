@@ -5,6 +5,9 @@ import ProgressPage from "./pages/ProgressPage";
 import ExpenseCreate from "./pages/ExpenseCreate";
 import Auth from "./pages/AuthPage";
 import { LandingPage } from "./pages/LandingPage";
+import Feed from "./pages/Feed";
+import ProfilePage from "./pages/ProfilePage";
+import EditExpense from "./pages/EditExpense";
 
 function App() {
   return (
@@ -27,6 +30,14 @@ function App() {
           }
         />
         <Route
+          path={"/edit/:id"}
+          element={
+            <IsPrivate>
+              <EditExpense />
+            </IsPrivate>
+          }
+        />
+        <Route
           path="/progress"
           element={
             <IsPrivate>
@@ -39,6 +50,22 @@ function App() {
           element={
             <IsPrivate>
               <ExpenseCreate />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              <ProfilePage />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/feed"
+          element={
+            <IsPrivate>
+              <Feed />
             </IsPrivate>
           }
         />

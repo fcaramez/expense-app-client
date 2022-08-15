@@ -12,7 +12,7 @@ function IsAnon({ children }) {
   if (!isLoggedIn) {
     return children;
   } else {
-    return navigate("/");
+    return navigate("/feed");
   }
 }
 

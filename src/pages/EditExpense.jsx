@@ -16,24 +16,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import expenseService from "../service/expense.service";
-import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import {  useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-function ExpenseCreate() {
+export default function EditExpense() {
   const [source, setSource] = useState("");
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [type, setType] = useState("");
-  const [date, setDate] = useState(Date.now);
+  const [date, setDate] = useState("");
   const [receipt, setReceipt] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
+  const navigate = useNavigate()
   const api = new expenseService();
   const { user } = useContext(AuthContext);
-
-  const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleFileUpload = (e) => {
     const uploadData = new FormData();
@@ -47,23 +48,30 @@ function ExpenseCreate() {
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
-  const createExpense = async () => {
+  const getOneExpense = async () => {
+    const expense = await api.getOneExpense(id);
+    setSource(expense.data.source);
+    setName(expense.data.name);
+    setPrice(expense.data.price);
+    setType(expense.data.type);
+    setDate(expense.data.date);
+    setReceipt(expense.data.receipt);
+  };
+
+  useEffect(() => {
+    getOneExpense();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const body = { source, name, price, type, date, receipt };
     try {
-      const body = { source, name, price, type, date, receipt };
-
-      await api.createExpense(user._id, body);
-
-      navigate("/progress");
+      await api.updateExpense(user._id, id, body);
+      navigate("/progress")
     } catch (error) {
-      setErrorMessage(error.respose.data.errorMessage);
+      setErrorMessage(error.response.data.errorMessage);
     }
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    createExpense();
-  };
-
   return (
     <form onSubmit={handleSubmit}>
       <Flex minH={"100vh"} align={"center"} justify={"center"}>
@@ -76,7 +84,7 @@ function ExpenseCreate() {
           px={6}>
           <Stack align={"center"}>
             <Heading fontSize={"4xl"} textAlign={"center"}>
-              Create an Entry
+              Edit your entry
             </Heading>
           </Stack>
           <Box rounded={"lg"} boxShadow={"lg"} p={8}>
@@ -105,7 +113,7 @@ function ExpenseCreate() {
               <FormControl isRequired>
                 <FormLabel>€ Price</FormLabel>
                 <InputGroup>
-                  <NumberInput width={"100%"}>
+                  <NumberInput width={"100%"} value={price} >
                     <NumberInputField
                       placeholder="Price"
                       width={"100%"}
@@ -142,6 +150,7 @@ function ExpenseCreate() {
                     size="md"
                     type="datetime-local"
                     onChange={(e) => setDate(e.target.value)}
+                    _selected={date}
                     value={date}
                     max={"today"}
                   />
@@ -177,5 +186,3 @@ function ExpenseCreate() {
     </form>
   );
 }
-
-export default ExpenseCreate;

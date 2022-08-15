@@ -7,27 +7,40 @@ import {
   ModalFooter,
   ModalBody,
   Text,
-  Button
+  Button,
+  ModalCloseButton,
 } from "@chakra-ui/react";
-export function ExpenseModal({ isOpen, onClose, closeModal, deleteExpense, modalInfo }) {
+import { useNavigate } from "react-router-dom";
+
+export function ExpenseModal({
+  isOpen,
+  onClose,
+  closeModal,
+  deleteExpense,
+  modalInfo,
+}) {
+  const navigate = useNavigate();
   return (
     <Modal key={modalInfo._id} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Name: {modalInfo.name}</ModalHeader>
+        <ModalCloseButton onClick={() => closeModal()} />
         <ModalBody>
           <Text>Cost: {modalInfo.price} €</Text>
           <Text>Date: {modalInfo.date.slice(0, 10)}</Text>
           <Text>Type: {modalInfo.type}</Text>
+          <Text>Receipt: </Text>
+          <img style={{maxWidth: `400px`}} src={modalInfo.receipt} alt="receipt" />
         </ModalBody>
 
         <ModalFooter>
           <Button
-            colorScheme="teal"
+            colorScheme={"green"}
             mr={3}
-            onClick={() => closeModal()}
+            onClick={() => navigate(`/edit/${modalInfo._id}`)}
             alignContent={"center"}>
-            Close
+            Edit
           </Button>
           <Button
             colorScheme={"red"}
