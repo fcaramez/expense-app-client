@@ -1,6 +1,6 @@
 import axios from "axios";
 
-class expenseService {
+class ExpenseService {
   constructor() {
     this.baseUrl = process.env.REACT_APP_API_URL;
     this.api = axios.create({
@@ -28,4 +28,4 @@ class expenseService {
   };
 }
 
-export default expenseService;
+export default ExpenseService;

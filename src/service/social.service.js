@@ -1,11 +1,11 @@
 import axios from "axios";
 
 class socialService {
-  cosntructor() {
-    this.BASE_URL = process.env.REACT_APP_API_URL;
+  constructor() {
+    this.baseUrl = process.env.REACT_APP_API_URL;
 
     this.api = axios.create({
-      baseURL: this.BASE_URL,
+      baseURL: this.baseUrl,
     });
   }
 
@@ -18,7 +18,7 @@ class socialService {
   };
 
   getPosts = () => {
-    return this.api.get("/api/posts");
+    return this.api.get(`/api/posts`);
   };
 
   createPost = (body) => {
