@@ -8,10 +8,13 @@ import { LandingPage } from "./pages/LandingPage";
 import Feed from "./pages/Feed";
 import ProfilePage from "./pages/ProfilePage";
 import EditExpense from "./pages/EditExpense";
+import NavBar from "./components/Navbar";
+import PostCreate from "./pages/PostCreate";
 
 function App() {
   return (
     <div className="App">
+      <NavBar />
       <Routes>
         <Route
           path="/"
@@ -66,6 +69,14 @@ function App() {
           element={
             <IsPrivate>
               <Feed />
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/create-post"
+          element={
+            <IsPrivate>
+              <PostCreate />
             </IsPrivate>
           }
         />
