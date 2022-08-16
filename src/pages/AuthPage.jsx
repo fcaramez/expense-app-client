@@ -10,6 +10,7 @@ function Auth() {
   const openLogin = () => {
     setLogin(true);
     setSignup(false);
+    
   };
 
   const openSignup = () => {
